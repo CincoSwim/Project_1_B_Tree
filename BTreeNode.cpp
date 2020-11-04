@@ -11,7 +11,7 @@ BTreeNode::BTreeNode(int _t, bool Is_Leaf) {
     isLeaf = Is_Leaf;
 
     keys = new string[2*degree-1];
-    childs = new BTreeNode *[2*degree];
+    children = new BTreeNode *[2 * degree];
 }
 
 
@@ -20,7 +20,7 @@ void BTreeNode::traverse() {
     int i;
     for (i=0; i < countTerms; i++){
         if (!isLeaf){
-            childs[i]->traverse();
+            children[i]->traverse();
         }
         cout << "" << keys[i];
     }
@@ -28,7 +28,7 @@ void BTreeNode::traverse() {
 
 
 BTreeNode *BTreeNode::search(string term) {
-    int i =0;
+    int i = 0;
     while (i < countTerms && term > keys[i]){
         i++;
     }
@@ -38,7 +38,7 @@ BTreeNode *BTreeNode::search(string term) {
     if (isLeaf == true){
         return NULL;
     }
-    return childs[i]->search(term);
+    return children[i]->search(term);
 }
 
 void BTree::AddTerm(string term) {
@@ -48,7 +48,14 @@ void BTree::AddTerm(string term) {
         root->countTerms = 1;
     }else{
         if(root->countTerms == 2*t-1){
-
+            BTreeNode *placehold = new BTreeNode(t, false);
+            placehold->children[0] = root;
+            placehold->breakUpChild(0, root);
+            int i = 0;
+            if (placehold->keys[0] < term) {
+                i++;
+            }
+            placehold->children[i]->InsertToNode(term);
         }
     }
 }

@@ -11,7 +11,7 @@ class BTreeNode {
     std::string *keys;       //String array for keys
     int degree;              //Minimum Degree
     int countTerms;              //Number of Entries
-    BTreeNode **childs; //Array of child pointers
+    BTreeNode **children; //Array of child pointers
     bool isLeaf;        //true if node is leaf, else false.
 
     BTreeNode(int _t, bool Is_Leaf);

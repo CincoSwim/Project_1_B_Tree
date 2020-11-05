@@ -10,13 +10,13 @@ BTreeNode::BTreeNode(int _t, bool Is_Leaf) {//can replace with hardcoded amount 
     degree = _t;
     isLeaf = Is_Leaf;
 
-    keyArray = new int[2 * degree - 1];
+    keyArray = new int[11];
     children = new BTreeNode *[2 * degree];
     countTerms = 0;
 }
 
 void BTree::traverse() {
-    if(root = NULL){
+    if(root == NULL){
         cout<< "Nothing in Tree." <<endl;
     }else{
         root->traverse();

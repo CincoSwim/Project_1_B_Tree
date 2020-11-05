@@ -19,18 +19,18 @@ int main() {
 
         char inputCMD;
         cin  >> setw(1) >> inputCMD;
-        //char input = toupper(inputCMD);
-        char input = 'A';
+        char input = toupper(inputCMD);
+        //char input = 'A';
         switch (input) {
             case 'A':
                 cin.clear();
                 while (cin.get()!= '\n'){continue;}
                 cout << "Enter Term for Insertion: ";
                 term = 0;
-                //getline (cin, term);
                 term = 17;
                 //term.resize(64);
                 tree.AddTerm(term);
+                tree.AddTerm(23);
                 break;
 
             case 'L':

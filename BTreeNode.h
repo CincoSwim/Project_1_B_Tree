@@ -8,7 +8,7 @@ using namespace std;
 
 class BTreeNode {
 
-    string *keyArray;       //String array for keyArray
+    int * keyArray;       //String array for keyArray
     int degree;              //Minimum Degree
     int countTerms;              //Number of Entries
     int diskAddress;

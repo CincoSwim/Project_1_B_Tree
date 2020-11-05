@@ -9,7 +9,7 @@ using namespace std;
 class BTreeNode {
 
     string *keyArray;       //String array for keyArray
-    static int degree;              //Minimum Degree
+    int degree;              //Minimum Degree
     int countTerms;              //Number of Entries
     int diskAddress;
     BTreeNode **children; //Array of child pointers
@@ -19,15 +19,15 @@ class BTreeNode {
     BTreeNode(int _t, bool Is_Leaf);
 
     void traverse();
-    void InsertToNode(string term);
+    void InsertToNode(int term);
     void breakUpChild(int i, BTreeNode *y);
-    BTreeNode *findNode(string term);
-    int findKeyIndex(string term);
-    void removeKey(string term);
+    BTreeNode *findNode(int term);
+    int findKeyIndex(int term);
+    void removeKey(int term);
         //removefromleaf()
         //removefromnonleaf()
-    std::string getPredecessorKey(int index);
-    std::string getSuccessorKey(int index);
+    int getPredecessorKey(int index);
+    int getSuccessorKey(int index);
     void fillToMin(int index);
         //borrowfromprev() and borrowfromnext() implemented in this too.
     void mergeNodes(int index);
@@ -44,9 +44,9 @@ public:
         root = NULL;
         degree = _t;
     };
-    void AddTerm(string term);
-    void RemoveTerm(string term);
-    BTreeNode* search(string key);
+    void AddTerm(int term);
+    void RemoveTerm(int term);
+    BTreeNode* search(int key);
     void traverse();
 
 };

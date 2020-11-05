@@ -10,7 +10,7 @@ BTreeNode::BTreeNode(int _t, bool Is_Leaf) {//can replace with hardcoded amount 
     degree = _t;
     isLeaf = Is_Leaf;
 
-    keyArray[] = new string[2 * degree - 1];
+    keyArray = new int[2 * degree - 1];
     children = new BTreeNode *[2 * degree];
     countTerms = 0;
 }
@@ -35,7 +35,7 @@ void BTreeNode::traverse() {
 };
 
 
-BTreeNode *BTreeNode::findNode(string term) {
+BTreeNode *BTreeNode::findNode(int term) {
     int i = 0;
     while (i < countTerms && term > keyArray[i]){
         i++;
@@ -49,7 +49,7 @@ BTreeNode *BTreeNode::findNode(string term) {
     return children[i]->findNode(term);
 }
 
-void BTree::AddTerm(string term) {
+void BTree::AddTerm(int term) {
     if (root == NULL){
         root = new BTreeNode(degree, true);
         root->keyArray[0] = term;
@@ -71,7 +71,7 @@ void BTree::AddTerm(string term) {
         }
     }
 }
-void BTree::RemoveTerm(string term) {
+void BTree::RemoveTerm(int term) {
     if (root = NULL){
         cout << "No tree" << endl;
         return;
@@ -86,14 +86,14 @@ void BTree::RemoveTerm(string term) {
     }
     return;
 }
-BTreeNode* BTree::search(string term) {
+BTreeNode* BTree::search(int term) {
     if (root = NULL){
         return NULL;
     }else{
         return root->findNode(term);
     }
 }
-void BTreeNode::InsertToNode(string term) {
+void BTreeNode::InsertToNode(int term) {
     int index = countTerms - 1;
     if(isLeaf){
         while (index >=0 && keyArray[index] > term){
@@ -143,7 +143,7 @@ void BTreeNode::breakUpChild(int i, BTreeNode *y) {
 
     countTerms++;
 }
-int BTreeNode::findKeyIndex(string term) {
+int BTreeNode::findKeyIndex(int term) {
     int index = 0;
     while (index < countTerms & keyArray[index] < term){
         ++index;
@@ -152,7 +152,7 @@ int BTreeNode::findKeyIndex(string term) {
     return index;
 }
 
-void BTreeNode::removeKey(string term) {
+void BTreeNode::removeKey(int term) {
     bool preFillChk;
     int index = findKeyIndex(term);
 
@@ -165,11 +165,11 @@ void BTreeNode::removeKey(string term) {
 
             } else{
                 if (children[index]->countTerms >= degree){
-                    string pred = getPredecessorKey(index);
+                    int pred = getPredecessorKey(index);
                     keyArray[index] = pred;
                     children[index]->removeKey(pred);
                 }else if (children[index + 1]->countTerms >= degree){
-                    string suc = getSuccessorKey(index);
+                    int suc = getSuccessorKey(index);
                     keyArray[index] = suc;
                     children[index]->removeKey(suc);
 
@@ -199,14 +199,14 @@ void BTreeNode::removeKey(string term) {
             children[index]->removeKey(term);
         }
 }
-string BTreeNode::getPredecessorKey(int index) {
+int BTreeNode::getPredecessorKey(int index) {
     BTreeNode *cursor = children[index];
     while(!cursor->isLeaf){
         cursor = cursor->children[cursor->countTerms];
     }
     return cursor->keyArray[cursor->countTerms - 1];
 }
-string BTreeNode::getSuccessorKey(int index) {
+int BTreeNode::getSuccessorKey(int index) {
     BTreeNode *cursor = children[index + 1];
     while(!cursor->isLeaf){
         cursor = cursor->children[0];

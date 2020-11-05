@@ -11,7 +11,7 @@ int main() {
 
     bool quitProgram = false;
     BTree tree(8);
-    string term = "";
+    int term = 0;
 
     while (quitProgram == false){
         cout << endl;
@@ -26,9 +26,9 @@ int main() {
                 cin.clear();
                 while (cin.get()!= '\n'){continue;}
                 cout << "Enter Term for Insertion: ";
-                term = "";
-                getline (cin, term);
-                term = "testInput";
+                term = 0;
+                //getline (cin, term);
+                term = 17;
                 //term.resize(64);
                 tree.AddTerm(term);
                 break;
@@ -37,9 +37,9 @@ int main() {
                 cin.clear();
                 while (cin.get()!= '\n'){continue;}
                 cout << "Enter Search Term: ";
-                term = "";
-                getline (cin, term);
-                term.resize(64);
+                //term = "";
+                //getline (cin, term);
+               // term.resize(64);
                 tree.search(term);
                 break;
 
@@ -47,9 +47,9 @@ int main() {
                 cin.clear();
                 while (cin.get()!= '\n'){continue;}
                 cout << "Enter Term for Removal: ";
-                term = "";
-                getline (cin, term);
-                term.resize(64);
+                //term = "";
+               // getline (cin, term);
+                //term.resize(64);
                 tree.RemoveTerm(term);
                 break;
 
